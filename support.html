@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>家小事 Famly — Support</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #F57C2A;
+    --orange-light: #FFD28A;
+    --coral: #FF7B6B;
+    --bg: #FFF9EE;
+    --card: #FFFFFF;
+    --text: #3A2818;
+    --text-muted: #9A7A5A;
+    --border: #F0E0CC;
+    --radius: 16px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', 'Noto Sans TC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* Header */
+  header {
+    background: linear-gradient(135deg, #FFD28A 0%, #FF9A3C 50%, #FF7B6B 100%);
+    padding: 60px 24px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    top: -80px; right: -60px;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    bottom: -60px; left: -40px;
+  }
+
+  .app-icon {
+    width: 88px; height: 88px;
+    border-radius: 22px;
+    background: white;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 48px;
+    box-shadow: 0 8px 32px rgba(90,40,10,0.2);
+    position: relative; z-index: 1;
+  }
+
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: -0.3px;
+    position: relative; z-index: 1;
+  }
+  header p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.85);
+    margin-top: 6px;
+    position: relative; z-index: 1;
+  }
+
+  /* Wave */
+  .wave {
+    display: block;
+    width: 100%;
+    margin-top: -2px;
+  }
+
+  /* Main */
+  main {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 8px 24px 60px;
+  }
+
+  /* Lang toggle */
+  .lang-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 24px 0 32px;
+  }
+  .lang-btn {
+    padding: 8px 20px;
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    background: white;
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+  .lang-btn.active {
+    background: var(--orange);
+    border-color: var(--orange);
+    color: white;
+  }
+
+  /* Section */
+  .section { margin-bottom: 32px; }
+
+  .section-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--orange);
+    margin-bottom: 12px;
+  }
+
+  /* Card */
+  .card {
+    background: var(--card);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  /* FAQ item */
+  .faq-item {
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+  }
+  .faq-item:last-child { border-bottom: none; }
+
+  .faq-q {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+  .faq-q span {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    flex: 1;
+  }
+  .faq-arrow {
+    font-size: 18px;
+    color: var(--orange);
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+  .faq-item.open .faq-arrow { transform: rotate(90deg); }
+
+  .faq-a {
+    display: none;
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    padding-top: 10px;
+  }
+  .faq-item.open .faq-a { display: block; }
+
+  /* Info rows */
+  .info-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    text-decoration: none;
+    color: var(--text);
+    transition: background 0.15s;
+  }
+  .info-row:last-child { border-bottom: none; }
+  .info-row:hover { background: #FFF5EA; }
+
+  .info-icon {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .info-row .info-text { flex: 1; }
+  .info-row .info-label {
+    font-size: 15px; font-weight: 600; color: var(--text);
+  }
+  .info-row .info-sub {
+    font-size: 13px; color: var(--text-muted); margin-top: 2px;
+  }
+  .info-row .chevron { color: var(--border); font-size: 16px; }
+
+  /* Contact box */
+  .contact-box {
+    background: linear-gradient(135deg, #FFF3E0, #FFE8CC);
+    border-radius: var(--radius);
+    border: 1px solid #FFD5A0;
+    padding: 24px;
+    text-align: center;
+  }
+  .contact-box .emoji { font-size: 36px; margin-bottom: 12px; }
+  .contact-box h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+  .contact-box p { font-size: 14px; color: var(--text-muted); margin-bottom: 16px; }
+  .contact-btn {
+    display: inline-block;
+    background: var(--orange);
+    color: white;
+    padding: 12px 28px;
+    border-radius: 24px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    transition: opacity 0.2s;
+  }
+  .contact-btn:hover { opacity: 0.85; }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 12px;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+  }
+
+  /* Language show/hide */
+  [data-lang] { display: none; }
+  body.zh [data-lang="zh"] { display: block; }
+  body.en [data-lang="en"] { display: block; }
+  .info-row[data-lang] { display: none; }
+  body.zh .info-row[data-lang="zh"] { display: flex; }
+  body.en .info-row[data-lang="en"] { display: flex; }
+  .faq-item[data-lang] { display: none; }
+  body.zh .faq-item[data-lang="zh"] { display: block; }
+  body.en .faq-item[data-lang="en"] { display: block; }
+  .contact-box[data-lang] { display: none; }
+  body.zh .contact-box[data-lang="zh"] { display: block; }
+  body.en .contact-box[data-lang="en"] { display: block; }
+</style>
+</head>
+<body class="zh">
+
+<header>
+  <div class="app-icon">🏠</div>
+  <h1>家小事 Famly</h1>
+  <p>把家人的事，都記在心上</p>
+</header>
+
+<svg class="wave" viewBox="0 0 1440 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+  <path d="M0,40 C360,0 1080,60 1440,20 L1440,0 L0,0 Z" fill="#FF9A3C" opacity="0.3"/>
+  <path d="M0,40 C480,10 960,50 1440,30 L1440,0 L0,0 Z" fill="#FFD28A" opacity="0.4"/>
+</svg>
+
+<main>
+
+  <!-- Language toggle -->
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('zh')">繁體中文</button>
+    <button class="lang-btn" onclick="setLang('en')">English</button>
+  </div>
+
+  <!-- Quick links -->
+  <div class="section">
+    <div class="card">
+
+      <a class="info-row" data-lang="zh" href="#faq">
+        <div class="info-icon" style="background:#FFF0E8">❓</div>
+        <div class="info-text">
+          <div class="info-label">常見問題</div>
+          <div class="info-sub">快速找到解答</div>
+        </div>
+        <span class="chevron">›</span>
+      </a>
+      <a class="info-row" data-lang="en" href="#faq">
+        <div class="info-icon" style="background:#FFF0E8">❓</div>
+        <div class="info-text">
+          <div class="info-label">FAQ</div>
+          <div class="info-sub">Find quick answers</div>
+        </div>
+        <span class="chevron">›</span>
+      </a>
+
+      <a class="info-row" data-lang="zh" href="https://yaotsan-at.github.io/famly-privacy/privacy.html">
+        <div class="info-icon" style="background:#EEF5FF">🔒</div>
+        <div class="info-text">
+          <div class="info-label">隱私權政策</div>
+          <div class="info-sub">我們如何保護你的資料</div>
+        </div>
+        <span class="chevron">›</span>
+      </a>
+      <a class="info-row" data-lang="en" href="https://yaotsan-at.github.io/famly-privacy/privacy.html">
+        <div class="info-icon" style="background:#EEF5FF">🔒</div>
+        <div class="info-text">
+          <div class="info-label">Privacy Policy</div>
+          <div class="info-sub">How we protect your data</div>
+        </div>
+        <span class="chevron">›</span>
+      </a>
+
+      <div class="info-row" data-lang="zh" style="cursor:default">
+        <div class="info-icon" style="background:#F0FBF0">📱</div>
+        <div class="info-text">
+          <div class="info-label">目前版本</div>
+          <div class="info-sub">家小事 Famly v1.0 · iOS 17+</div>
+        </div>
+      </div>
+      <div class="info-row" data-lang="en" style="cursor:default">
+        <div class="info-icon" style="background:#F0FBF0">📱</div>
+        <div class="info-text">
+          <div class="info-label">Current Version</div>
+          <div class="info-sub">Famly v1.0 · iOS 17+</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FAQ 繁中 -->
+  <div class="section" id="faq">
+    <div class="section-title" data-lang="zh">常見問題</div>
+    <div class="section-title" data-lang="en">Frequently Asked Questions</div>
+    <div class="card">
+
+      <div class="faq-item" data-lang="zh">
+        <div class="faq-q"><span>資料儲存在哪裡？安全嗎？</span><span class="faq-arrow">›</span></div>
+        <div class="faq-a">所有記錄儲存在你的個人 iCloud 私有資料庫，Famly 無法存取你的資料。帳號密碼使用 iOS Keychain 硬體加密儲存，不會上傳至任何第三方伺服器。</div>
+      </div>
+
+      <div class="faq-item" data-lang="zh">
+        <div class="faq-q"><span>如何與家人共用 app？</span><span class="faq-arrow">›</span></div>
+        <div class="faq-a">透過設定頁的「家庭共享」功能，產生邀請連結傳給家人，對方接受後即可在各自裝置看到共用的家庭記錄。需要雙方都安裝 Famly 並登入 iCloud。</div>
+      </div>
+
+      <div class="faq-item" data-lang="zh">
+        <div class="faq-q"><span>如何恢復已購買的完整版？</span><span class="faq-arrow">›</span></div>
+        <div class="faq-a">設定 → 方案 → 點「恢復購買」。使用同一個 Apple ID 登入即可免費恢復，不需要再次付費。</div>
+      </div>
+
+      <div class="faq-item" data-lang="zh">
+        <div class="faq-q"><span>換手機後資料會消失嗎？</span><span class="faq-arrow">›</span></div>
+        <div class="faq-a">不會。記錄透過 iCloud 自動同步，新手機登入同一個 Apple ID 後資料會自動出現。帳密保險箱的個人私密項目需透過「恢復購買」重新解鎖。</div>
+      </div>
+
+      <div class="faq-item" data-lang="zh">
+        <div class="faq-q"><span>通知為什麼沒有跳出來？</span><span class="faq-arrow">›</span></div>
+        <div class="faq-a">請確認：1) iOS 設定 → Famly → 通知 → 已開啟。2) app 內設定 → 通知設定 → 已啟用。3) 記錄有設定到期日。如果仍然沒有，可以嘗試重新開啟通知權限。</div>
+      </div>
+
+      <div class="faq-item" data-lang="zh">
+        <div class="faq-q"><span>免費版有哪些限制？</span><span class="faq-arrow">›</span></div>
+        <div class="faq-a">免費版可使用全部 7 大類別，家庭成員上限 2 位，帳密保險箱可存 10 組。升級完整版（一次買斷）即可解除所有限制，無限成員、無限記錄、無限保險箱。</div>
+      </div>
+
+      <!-- English FAQ -->
+      <div class="faq-item" data-lang="en">
+        <div class="faq-q"><span>Where is my data stored? Is it secure?</span><span class="faq-arrow">›</span></div>
+        <div class="faq-a">All records are stored in your personal private iCloud database. Famly cannot access your data. Passwords are encrypted using iOS Keychain hardware encryption and are never uploaded to any third-party server.</div>
+      </div>
+
+      <div class="faq-item" data-lang="en">
+        <div class="faq-q"><span>How do I share the app with family?</span><span class="faq-arrow">›</span></div>
+        <div class="faq-a">Use the "Family Sharing" feature in Settings to generate an invitation link. Once your family member accepts the invite, they can view and manage shared records from their device. Both devices need to have Famly installed and be signed into iCloud.</div>
+      </div>
+
+      <div class="faq-item" data-lang="en">
+        <div class="faq-q"><span>How do I restore my purchase?</span><span class="faq-arrow">›</span></div>
+        <div class="faq-a">Go to Settings → Plan → Tap "Restore Purchase". Sign in with the same Apple ID you used to purchase, and your full version will be restored at no extra charge.</div>
+      </div>
+
+      <div class="faq-item" data-lang="en">
+        <div class="faq-q"><span>Will my data transfer to a new phone?</span><span class="faq-arrow">›</span></div>
+        <div class="faq-a">Yes. All records sync automatically via iCloud. Just sign in with the same Apple ID on your new phone and your data will appear. Use "Restore Purchase" to re-unlock the full version.</div>
+      </div>
+
+      <div class="faq-item" data-lang="en">
+        <div class="faq-q"><span>Why am I not receiving notifications?</span><span class="faq-arrow">›</span></div>
+        <div class="faq-a">Please check: 1) iOS Settings → Famly → Notifications → Allow. 2) In-app Settings → Notification Settings → Enabled. 3) The record has a due date set. If still not working, try toggling notification permissions off and on.</div>
+      </div>
+
+      <div class="faq-item" data-lang="en">
+        <div class="faq-q"><span>What are the free tier limitations?</span><span class="faq-arrow">›</span></div>
+        <div class="faq-a">The free tier includes all 7 categories, up to 2 family members, and 10 password vault entries. Upgrading to the full version (one-time purchase) removes all limits: unlimited members, records, and vault entries.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Contact -->
+  <div class="section">
+    <div class="contact-box" data-lang="zh">
+      <div class="emoji">💌</div>
+      <h3>還有其他問題？</h3>
+      <p>找不到解答的話，歡迎寄信給我們，<br>我們會在 2 個工作天內回覆。</p>
+      <a class="contact-btn" href="mailto:calorie.recycle@gmail.com">聯絡我們</a>
+    </div>
+    <div class="contact-box" data-lang="en">
+      <div class="emoji">💌</div>
+      <h3>Still have questions?</h3>
+      <p>Can't find what you're looking for?<br>We'll get back to you within 2 business days.</p>
+      <a class="contact-btn" href="mailto:calorie.recycle@gmail.com">Contact Us</a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  &copy; 2026 家小事 Famly &nbsp;·&nbsp;
+  <a href="https://yaotsan-at.github.io/famly-privacy/privacy.html" style="color:var(--orange);text-decoration:none">隱私權政策 / Privacy Policy</a>
+</footer>
+
+<script>
+  function setLang(lang) {
+    document.body.className = lang;
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent.includes(lang === 'zh' ? '中文' : 'English'));
+    });
+  }
+
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.addEventListener('click', () => {
+      item.classList.toggle('open');
+    });
+  });
+</script>
+</body>
+</html>
