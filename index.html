@@ -16,6 +16,8 @@
     --green-text: #1E7B3A;
     --blue-bg: #E6F1FB;
     --blue-text: #185FA5;
+    --amber-bg: #FFF3E0;
+    --amber-text: #A05A00;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -96,6 +98,7 @@
   }
   .label-blue { background: var(--blue-bg); color: var(--blue-text); }
   .label-green { background: var(--green-bg); color: var(--green-text); }
+  .label-amber { background: var(--amber-bg); color: var(--amber-text); }
   .card p { font-size: 14px; color: var(--muted); margin: 0; line-height: 1.65; }
   .highlight {
     background: var(--blue-bg);
@@ -122,7 +125,7 @@
 <div class="header">
   <div class="app">家小事 Famly</div>
   <h1>隱私權政策 Privacy Policy</h1>
-  <div class="date">最後更新 Last Updated：2026-05-31</div>
+  <div class="date">最後更新 Last Updated：2026-09-27</div>
 </div>
 
 <div class="lang-switch">
@@ -136,65 +139,104 @@
 <div data-lang="zh" class="active">
 
   <div class="notice">
-    家小事不收集、不傳送任何使用者資料至開發者伺服器。所有資料僅存於您的裝置及您個人的 iCloud 私有資料庫。
+    家小事不會把你的資料傳送到我們自己的伺服器。你輸入的內容儲存在你的裝置與你個人的 Apple iCloud 私有資料庫；如果你邀請家人加入共享家庭，資料會透過 Apple 官方的 CloudKit 共享資料庫，同步給你邀請的家庭成員（詳見第 3 節）。
   </div>
 
   <div class="section">
     <h2>1. 總覽</h2>
-    <p>家小事（Famly）是一款家庭記錄管理工具，協助家長記錄家人的健康、車輛、證件、寵物及孩子的成長資訊。本 app 由個人開發者發布，不隸屬於任何公司。</p>
-    <p>本隱私政策說明我們如何處理您的個人資料。</p>
+    <p>家小事（Famly）是一款家庭記錄管理工具，協助家長記錄家人的健康、車輛、證件、寵物及孩子的成長資訊，並提供選擇性的行事曆同步（付費功能）。本 app 由個人開發者發布，不隸屬於任何公司。</p>
+    <p>本隱私政策說明我們如何處理您的個人資料，以及本 app 會用到哪些裝置權限。</p>
   </div>
 
   <div class="section">
     <h2>2. 我們收集什麼資料？</h2>
-    <div class="highlight">我們<strong>不收集</strong>任何資料。所有您在 app 中輸入的內容，均儲存於您自己的裝置或您個人的 Apple iCloud 私有資料庫，開發者無法存取。</div>
+    <div class="highlight">我們<strong>不在自己的伺服器收集</strong>任何資料。所有您在 app 中輸入的內容，均儲存於您自己的裝置或您個人的 Apple iCloud 資料庫，開發者無法存取。</div>
 
     <div class="card">
       <span class="label label-blue">家庭記錄</span>
-      <p>健康紀錄、車輛保養、證件到期、孩子成長、寵物資料等，均透過 Apple 的 CloudKit 私有資料庫同步，僅您本人可存取。</p>
+      <p>健康紀錄、車輛保養、證件到期、孩子成長、寵物資料等，均透過 Apple 的 CloudKit 資料庫同步。未啟用家庭共享時僅您本人可存取；啟用後，您邀請的家庭成員也能依權限查看或編輯（見第 3 節）。</p>
     </div>
     <div class="card">
       <span class="label label-blue">帳密保險箱</span>
-      <p>密碼明文儲存於裝置的 iOS Keychain（硬體加密），或透過 iCloud Keychain 同步至您的家庭成員。密碼不會上傳至任何第三方伺服器。查看密碼需通過 Face ID / Touch ID 驗證。</p>
+      <p>密碼儲存於裝置的 iOS Keychain（硬體加密）。標記為「全家共用」的項目會透過 iCloud Keychain 同步給您的家庭成員；標記為「個人」的項目僅存在您自己的裝置。密碼不會上傳至任何第三方伺服器。查看密碼需通過 Face ID / Touch ID 驗證。</p>
     </div>
     <div class="card">
       <span class="label label-green">App 偏好設定</span>
-      <p>通知設定、類別排序等使用者偏好，存於裝置本機 UserDefaults，不離開您的裝置。</p>
+      <p>通知設定、類別排序、行事曆同步開關等使用者偏好，存於裝置本機 UserDefaults，不離開您的裝置。</p>
     </div>
   </div>
 
   <div class="section">
-    <h2>3. 兒童資料保護</h2>
+    <h2>3. 家庭共享（選用功能）</h2>
+    <p>家小事的核心設計是讓一家人共用同一份記錄。當您透過邀請連結或 QR Code 邀請家人加入，您們的家庭記錄會透過 Apple 官方的 CloudKit「共享資料庫」同步——這代表被邀請的家庭成員也能看到（依角色可能也能編輯）您加入共享範圍的記錄，不再只有您本人可存取。</p>
+    <ul>
+      <li>邀請與被邀請的過程完全透過 Apple 的 CloudKit 分享機制（<code>CKShare</code>）處理，開發者無法看到您分享了什麼、跟誰分享</li>
+      <li>您可以隨時在「設定 → 共享成員」移除某位成員，或作為受邀者自行離開家庭</li>
+      <li>帳密保險箱裡標記「個人」的項目<strong>不會</strong>進入共享範圍，僅您自己看得到</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>4. 裝置權限使用說明</h2>
+    <p>本 app 會在您實際使用對應功能時，向系統請求以下權限。您隨時可以在 iPhone「設定」App 裡調整或撤銷：</p>
+
+    <div class="card">
+      <span class="label label-amber">相機</span>
+      <p>掃描邀請連結的 QR Code，以加入家人的共享家庭。不會用於其他用途，不會儲存或上傳您掃描到的畫面。</p>
+    </div>
+    <div class="card">
+      <span class="label label-amber">通訊錄</span>
+      <p>方便您從通訊錄選擇聯絡人，把邀請連結傳送給對方。本 app 不會讀取、儲存或上傳您的通訊錄內容，僅用於當下這一次分享操作。</p>
+    </div>
+    <div class="card">
+      <span class="label label-amber">行事曆（完整取用權限，付費功能）</span>
+      <p>這是選擇性加入的付費功能：開啟後，家小事會把您指定分類的記錄（到期日、重要日子等）寫入 iPhone 內建的「行事曆」App，方便您在慣用的行事曆裡一起看到。家小事只會建立/更新/刪除自己寫入的事件，<strong>不會讀取您行事曆裡原本就有的其他事件</strong>。這是每台裝置各自的設定，不會透過 iCloud 同步到您的其他裝置或家人的裝置。</p>
+    </div>
+    <div class="card">
+      <span class="label label-amber">Face ID / Touch ID</span>
+      <p>僅在您於帳密保險箱內點擊「顯示密碼」時觸發，用來驗證是您本人，不會自動或在背景觸發。</p>
+    </div>
+    <div class="card">
+      <span class="label label-amber">照片</span>
+      <p>讓您可以把手機相簿裡的照片附加到記錄中（例如收據、保固卡照片），僅存取您主動選擇的照片。</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>5. 兒童資料保護</h2>
     <p>家小事的使用者為家長，孩子的身高體重、學校繳費、才藝課等資訊由家長代為輸入與管理。本 app 並非設計給兒童直接使用。</p>
     <ul>
       <li>本 app <strong>不直接向兒童收集</strong>任何個人資訊</li>
-      <li>所有兒童相關資料僅存於家長的 iCloud 私有資料庫，不外傳</li>
+      <li>所有兒童相關資料僅存於家長的 iCloud 資料庫（若啟用家庭共享，僅同步給該家庭受邀成員），不會傳送給開發者或任何第三方</li>
       <li>本 app 不含廣告、不含第三方追蹤 SDK</li>
       <li>本 app 符合美國 COPPA（兒童線上隱私保護法）之精神：不向 13 歲以下兒童直接收集個人資料</li>
     </ul>
   </div>
 
   <div class="section">
-    <h2>4. 資料儲存與同步</h2>
-    <p>本 app 使用 Apple 的 CloudKit 技術進行跨裝置同步。您的資料儲存於 Apple 管理的私有資料庫（Private Database），開發者無 Dashboard 可查看您的個人內容。</p>
+    <h2>6. 資料儲存與同步</h2>
+    <p>本 app 使用 Apple 的 CloudKit 技術進行跨裝置同步。您的資料儲存於 Apple 管理的私有資料庫（或您啟用家庭共享後的共享資料庫），開發者沒有後台可查看您的個人內容。</p>
     <p>資料的隱私保護受 Apple 隱私政策規範：<a href="https://www.apple.com/legal/privacy/" style="color: var(--orange);">apple.com/legal/privacy</a></p>
   </div>
 
   <div class="section">
-    <h2>5. 第三方分享</h2>
+    <h2>7. 第三方服務與連線</h2>
     <p>我們不與任何第三方分享您的個人資料。本 app 不含廣告網路、分析 SDK、或社群媒體追蹤器。</p>
+    <p>唯一的例外：當您在設定頁手動點擊「更新即時匯率」，本 app 會向一個公開的第三方開源匯率服務發出查詢請求，取得當下的貨幣匯率數字，用於把不同幣別的花費換算成您慣用的幣值顯示。這個請求<strong>不會夾帶任何個人資料或記錄內容</strong>，且只有在您主動點擊時才會觸發，不會自動或在背景執行。</p>
   </div>
 
   <div class="section">
-    <h2>6. 您的資料控制權</h2>
+    <h2>8. 您的資料控制權</h2>
     <ul>
       <li><strong>刪除資料：</strong>您可在 app 設定頁選擇「清除本機所有資料」，或直接在 iPhone 設定 → 帳號 → iCloud → 管理儲存空間中刪除家小事的雲端資料。</li>
+      <li><strong>離開共享家庭：</strong>您可以隨時在「設定 → 共享成員」離開一個共享家庭，或移除您邀請的成員。</li>
       <li><strong>帳密保險箱：</strong>您可在 app 內逐筆刪除，密碼將同步從 Keychain 中移除。</li>
+      <li><strong>行事曆同步：</strong>關閉某個分類的同步，或關閉總開關，家小事寫入的事件會一併從您的行事曆移除。</li>
     </ul>
   </div>
 
   <div class="section">
-    <h2>7. 聯絡我們</h2>
+    <h2>9. 聯絡我們</h2>
     <p>如有任何隱私相關問題，請透過 App Store 的開發者聯絡方式與我們聯繫。</p>
   </div>
 
@@ -204,72 +246,111 @@
 <div data-lang="en">
 
   <div class="notice">
-    Famly does not collect or transmit any user data to developer servers. All data is stored only on your device and in your personal iCloud private database.
+    Famly does not send your data to our own servers. What you enter is stored on your device and in your personal Apple iCloud private database; if you invite family members to a shared family, that data syncs to them through Apple's official CloudKit shared database (see Section 3).
   </div>
 
   <div class="section">
     <h2>1. Overview</h2>
-    <p>Famly (家小事) is a family record management app that helps parents track health records, vehicle maintenance, document expiry, pets, and children's growth information. This app is published by an independent developer.</p>
-    <p>This Privacy Policy explains how we handle your personal information.</p>
+    <p>Famly (家小事) is a family record management app that helps parents track health records, vehicle maintenance, document expiry, pets, and children's growth information, with an optional calendar sync feature (part of the paid Full Version). This app is published by an independent developer.</p>
+    <p>This Privacy Policy explains how we handle your personal information and which device permissions the app uses.</p>
   </div>
 
   <div class="section">
     <h2>2. What data do we collect?</h2>
-    <div class="highlight">We collect <strong>no data</strong>. Everything you enter in the app is stored on your own device or in your personal Apple iCloud private database, which the developer cannot access.</div>
+    <div class="highlight">We do <strong>not collect any data on our own servers</strong>. Everything you enter in the app is stored on your own device or in your personal Apple iCloud database, which the developer cannot access.</div>
 
     <div class="card">
       <span class="label label-blue">Family Records</span>
-      <p>Health records, vehicle maintenance logs, document expiry dates, children's growth data, and pet information are synced through Apple's CloudKit private database and accessible only to you.</p>
+      <p>Health records, vehicle maintenance logs, document expiry dates, children's growth data, and pet information are synced through Apple's CloudKit database. Without Family Sharing enabled, only you can access them; once enabled, the family members you invite can also view or edit them depending on their role (see Section 3).</p>
     </div>
     <div class="card">
       <span class="label label-blue">Password Vault</span>
-      <p>Passwords are stored in the device's iOS Keychain (hardware-encrypted) or synced via iCloud Keychain to your family members. Passwords are never uploaded to any third-party server. Viewing passwords requires Face ID / Touch ID authentication.</p>
+      <p>Passwords are stored in the device's iOS Keychain (hardware-encrypted). Entries marked "Shared with Family" sync to your family members via iCloud Keychain; entries marked "Personal" stay only on your own device. Passwords are never uploaded to any third-party server. Viewing a password requires Face ID / Touch ID authentication.</p>
     </div>
     <div class="card">
       <span class="label label-green">App Preferences</span>
-      <p>Notification settings, category ordering, and other preferences are stored locally in UserDefaults and never leave your device.</p>
+      <p>Notification settings, category ordering, calendar sync toggles, and other preferences are stored locally in UserDefaults and never leave your device.</p>
     </div>
   </div>
 
   <div class="section">
-    <h2>3. Children's Data</h2>
+    <h2>3. Family Sharing (Optional)</h2>
+    <p>Famly is built around a family sharing your records together. When you invite a family member via an invite link or QR code, your family's records sync through Apple's official CloudKit shared database — meaning invited family members can see (and, depending on role, edit) the records you've shared, not just you.</p>
+    <ul>
+      <li>Inviting and accepting is handled entirely through Apple's CloudKit sharing mechanism (<code>CKShare</code>); the developer cannot see what you shared or with whom</li>
+      <li>You can remove a member anytime under Settings → Shared Members, or leave a shared family yourself as an invited member</li>
+      <li>Password Vault entries marked "Personal" are <strong>never</strong> included in the shared scope — only you can see them</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>4. Device Permissions</h2>
+    <p>The app requests the following permissions only when you actually use the corresponding feature. You can review or revoke them anytime in the iPhone Settings app:</p>
+
+    <div class="card">
+      <span class="label label-amber">Camera</span>
+      <p>To scan an invite QR code so you can join a family member's shared family. Used for no other purpose; the scanned image is never stored or uploaded.</p>
+    </div>
+    <div class="card">
+      <span class="label label-amber">Contacts</span>
+      <p>Lets you pick a contact to send them an invite link. The app never reads, stores, or uploads your contacts — access is used only for that one sharing action.</p>
+    </div>
+    <div class="card">
+      <span class="label label-amber">Calendars (Full Access, paid feature)</span>
+      <p>An opt-in paid feature: once enabled, Famly writes the records from your chosen categories (due dates, special days, etc.) into the iPhone's built-in Calendar app, so you can see them alongside your other events. Famly only creates, updates, or deletes the events it created itself — it <strong>never reads any of your existing calendar events</strong>. This is a per-device setting; it does not sync via iCloud to your other devices or your family members' devices.</p>
+    </div>
+    <div class="card">
+      <span class="label label-amber">Face ID / Touch ID</span>
+      <p>Triggered only when you tap "Reveal Password" inside the Password Vault, to confirm it's really you. Never triggered automatically or in the background.</p>
+    </div>
+    <div class="card">
+      <span class="label label-amber">Photos</span>
+      <p>Lets you attach a photo from your library to a record (e.g. a receipt or warranty card). Only the photo you actively pick is accessed.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>5. Children's Data</h2>
     <p>Famly is designed for parents. Information such as a child's height, weight, school payments, and activity classes is entered and managed by parents on behalf of their children. This app is not designed for direct use by children.</p>
     <ul>
       <li>This app does <strong>not directly collect</strong> personal information from children</li>
-      <li>All children-related data is stored only in the parent's private iCloud database and is never shared externally</li>
+      <li>All children-related data stays in the parent's iCloud database (synced only to that family's invited members if Family Sharing is enabled), and is never sent to the developer or any other third party</li>
       <li>This app contains no advertisements and no third-party tracking SDKs</li>
       <li>This app complies with the spirit of COPPA (Children's Online Privacy Protection Act): we do not directly collect personal data from children under 13</li>
     </ul>
   </div>
 
   <div class="section">
-    <h2>4. Data Storage &amp; Sync</h2>
-    <p>This app uses Apple's CloudKit technology for cross-device synchronization. Your data is stored in Apple's Private Database — the developer has no dashboard access to your personal content.</p>
+    <h2>6. Data Storage &amp; Sync</h2>
+    <p>This app uses Apple's CloudKit technology for cross-device synchronization. Your data is stored in Apple's private database (or the shared database once you enable Family Sharing) — the developer has no dashboard access to your personal content.</p>
     <p>Data privacy is governed by Apple's Privacy Policy: <a href="https://www.apple.com/legal/privacy/" style="color: var(--orange);">apple.com/legal/privacy</a></p>
   </div>
 
   <div class="section">
-    <h2>5. Third-Party Sharing</h2>
+    <h2>7. Third-Party Services &amp; Network Connections</h2>
     <p>We do not share your personal data with any third parties. This app contains no ad networks, analytics SDKs, or social media trackers.</p>
+    <p>The one exception: when you manually tap "Update Live Rates" in Settings, the app queries a public, third-party open-source currency exchange rate service to get current exchange rate figures, used to convert costs entered in different currencies into your preferred display currency. This request <strong>never includes any personal data or record content</strong>, and only happens when you explicitly tap the button — never automatically or in the background.</p>
   </div>
 
   <div class="section">
-    <h2>6. Your Data Controls</h2>
+    <h2>8. Your Data Controls</h2>
     <ul>
       <li><strong>Delete data:</strong> You can choose "Clear All Local Data" in the app settings, or delete Famly's cloud data via iPhone Settings → Account → iCloud → Manage Storage.</li>
+      <li><strong>Leave a shared family:</strong> You can leave a shared family, or remove a member you invited, anytime under Settings → Shared Members.</li>
       <li><strong>Password Vault:</strong> You can delete individual entries within the app; passwords will be simultaneously removed from Keychain.</li>
+      <li><strong>Calendar sync:</strong> Turning off a category or the master toggle removes the events Famly wrote from your calendar.</li>
     </ul>
   </div>
 
   <div class="section">
-    <h2>7. Contact Us</h2>
+    <h2>9. Contact Us</h2>
     <p>For any privacy-related questions, please contact us through the developer contact information on the App Store.</p>
   </div>
 
 </div><!-- /en -->
 
 <div class="footer">
-  家小事 Famly &nbsp;|&nbsp; 隱私權政策 v1.0 &nbsp;|&nbsp; 2026-05-31
+  家小事 Famly &nbsp;|&nbsp; 隱私權政策 v1.1 &nbsp;|&nbsp; 2026-09-27
 </div>
 
 </div><!-- /container -->
